@@ -1,6 +1,8 @@
-// src/App.js
 import React, { useEffect } from 'react';
-import Login from './components/Login';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import LoginPage from './components/LoginPage';
+import Layout from './components/Layout';
 import { auth } from './firebaseConfig';
 import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 
@@ -27,9 +29,14 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
